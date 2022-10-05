@@ -29,6 +29,10 @@ public class EVA2_1_LISTA_SIMPLE {
        }catch(Exception ex){
            ex.printStackTrace();
        }
+       // debe imprimir el 70 en la posición donde esta el 40(posición 3)
+       miLista.imprimir();
+       miLista.vaciarLista();
+       miLista.imprimir();
        
         // int[] arreglo = new int[1000000];
        
@@ -47,3 +51,4 @@ public class EVA2_1_LISTA_SIMPLE {
     }
     
 }
+
