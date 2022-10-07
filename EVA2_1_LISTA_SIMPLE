@@ -26,14 +26,19 @@ public class EVA2_1_LISTA_SIMPLE {
         miLista.agregar(40); // 3 <------ inserción
         miLista.agregar(50); // 4
         miLista.agregar(60); // 5
+        
         miLista.imprimir();
+        System.out.println("Cantidad de nodos: " + miLista.tamaLista());
+        
         try {
             miLista.insertarEn(70, 3);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.getLogger(EVA2_1_LISTA_SIMPLE.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // debe imprimir el 70 en la posición donde esta el 40(posición 3)
+        
         miLista.imprimir();
+        System.out.println("Cantidad de nodos: " + miLista.tamaLista());
+        // debe imprimir el 70 en la posición donde esta el 40(posición 3)
         
         // Sirve para borrar el numero que queramos dependiendo de su posición
         try {
@@ -44,7 +49,15 @@ public class EVA2_1_LISTA_SIMPLE {
         
          
         miLista.agregar(80);
+        
         miLista.imprimir();
+        System.out.println("Cantidad de nodos: " + miLista.tamaLista());
+        
+        try {
+            System.out.println("Valor en la posición 4: " + miLista.obtenerValorEn(4));
+        } catch (Exception ex) {
+            Logger.getLogger(EVA2_1_LISTA_SIMPLE.class.getName()).log(Level.SEVERE, null, ex);
+        }
        //miLista.vaciarLista();
         //miLista.imprimir();
 
