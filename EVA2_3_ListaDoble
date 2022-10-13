@@ -67,9 +67,99 @@ public class ListaDoble {
         cont ++;
         
     } 
+    public void insertarEn(int valor, int pos) throws Exception{ 
+        // ¿Qué debemos validar?
+        // insertar en una posición no válida
+        int cantNodos = tamaLista();
+        
+        if(pos < 0) // posiciones negativas
+            throw new Exception("No puede insertarse un nodo en una posición negativa");
+        else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+            throw new Exception(pos + " no es una posición valida en la lista");
+        else{
+            Nodo nuevoNodo = new Nodo(valor);
+            if(pos == 0){ // insertar al inicio de la lista
+                nuevoNodo.setSiguiente(inicio);
+                inicio.setPrevio(nuevoNodo);
+                inicio = nuevoNodo;
+            }else{
+                Nodo temp = inicio;
+                int cont = 0;
+                while(cont < pos){
+                    temp = temp.getSiguiente();
+                    cont++;
+            } 
+                nuevoNodo.setSiguiente(temp);
+                nuevoNodo.setPrevio(temp.getPrevio());
+                temp.getPrevio().setSiguiente(nuevoNodo);
+                temp.setPrevio(nuevoNodo);
+                // System.out.println(temp.getValor() + " - ");
+            }
+            this.cont++;
+        }
+    }
     public void vaciarLista(){
         inicio = null;
         fin = null;
         cont = 0;
+    }
+    public void borrarEn(int pos) throws Exception{
+        int cantNodos = tamaLista();
+        
+        if(pos < 0) // posiciones negativas
+            throw new Exception("No puede borrarse un nodo en una posición negativa");
+        else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+            throw new Exception(pos + " no es una posición valida en la lista");
+        else{
+            // Piensen como programadores
+            // Que puede salir mal si:
+            if(cantNodos == 1){
+                vaciarLista();
+            }else{
+                // borrar el primer nodo (128 LISTO)
+                // borrar nodo intermedio
+                // borar el último nodo
+                if(pos == 0){
+                    inicio = inicio.getSiguiente();
+                    
+                }else{
+                    Nodo temp = inicio;
+                    int cont = 0;
+                    while(cont < pos){
+                        temp = temp.getSiguiente();
+                        cont++;
+                 }
+                    // Nodo objSig = temp.getSiguiente(); // esta es la manera más recomendable, ya que es más legible
+                    // temp.setSiguiente(objSig.getSiguiente());
+                    temp.setSiguiente(temp.getSiguiente().getSiguiente()); // el punto convierte una dirección en un objeto -- en este caso el getSiguiente regresa un objeto
+                    temp.setPrevio(temp.getPrevio().getPrevio());
+                    
+                    if(pos == (cantNodos - 1)){ // reconectamos a fin
+                        fin = temp;
+                    }
+                }
+                this.cont--;
+            }
+            
+        }
+    }
+    public int obtenerValorEn(int pos) throws Exception{
+                int cantNodos = tamaLista();
+                int valor = 0;
+        
+                if(pos < 0) // posiciones negativas
+                throw new Exception("No puede borrarse un nodo en una posición negativa");
+                else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+                    throw new Exception(pos + " no es una posición valida en la lista");
+                else{
+                    Nodo temp = inicio;
+                    int cont = 0;
+                    while(cont < (pos)){
+                        temp = temp.getSiguiente();
+                        cont++;
+                    }
+                    valor = temp.getValor();
+         }
+                return valor;
     }
 }
