@@ -5,6 +5,9 @@
  */
 package eva3_3_lista_doble;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author moviles
@@ -17,12 +20,28 @@ public class EVA3_3_LISTA_DOBLE {
     public static void main(String[] args) {
         
         ListaDoble listaDoble = new ListaDoble();
-        listaDoble.agregar(10);
-        listaDoble.agregar(20);
-        listaDoble.agregar(30);
-        listaDoble.agregar(40);
+        listaDoble.agregar(10); // 0
+        listaDoble.agregar(20); // 1
+        listaDoble.agregar(30); // 2
+        listaDoble.agregar(40); // 3
+        listaDoble.imprimir(); 
+        
+        
+        try {
+            listaDoble.insertarEn(70, 0);
+        } catch (Exception ex) {
+            Logger.getLogger(EVA3_3_LISTA_DOBLE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         listaDoble.imprimir();
         
+        try {
+            listaDoble.borrarEn(1);
+        } catch (Exception ex) {
+            Logger.getLogger(EVA3_3_LISTA_DOBLE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        listaDoble.imprimir();
     }
     
 }
