@@ -1,0 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eva3_4_queue;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author moviles
+ */
+public class EVA3_4_QUEUE {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        MyQueue myQueue = new MyQueue();
+        // -> FIFO ---> FIRST IN, FIRST OUT
+        myQueue.agregar(10); // PRIMERO EN LLEGAR, PRIMERO EN SER ATENDIDO
+        myQueue.agregar(20);
+        myQueue.agregar(30);
+        myQueue.agregar(40);
+        myQueue.agregar(50); // ULTIMO EN LLEGAR, ÚLTIMO EN SER ATENDIDO
+        
+        // Metodo peek
+        System.out.println("Primer valor en llegar es: " + myQueue.peek());
+        myQueue.imprimir();
+        
+        // Metodo poll
+        try {
+            System.out.println("Primer valor en llegar es: " + myQueue.poll());
+        } catch (Exception ex) {
+            Logger.getLogger(EVA3_4_QUEUE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        myQueue.imprimir();
+        
+    }
+    
+}
