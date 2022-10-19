@@ -1,0 +1,194 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eva2_5_stack;
+
+/**
+ *
+ * @author moviles
+ */
+public class MyStack {
+    
+    private Nodo inicio;
+    private Nodo fin;
+    private int cont;
+
+    // Por default, la lista esta vacía
+    public MyStack() {
+        this.inicio = null; // No hay nodos en la lista
+        this.fin = null;
+        this.cont = 0;
+        
+    }
+    public boolean listaVacia(){
+        if(inicio == null)
+            return true;
+        else
+            return false;
+    }
+    
+    public void imprimir(){
+        if(listaVacia())
+            System.out.println("La lista esta vacía");
+        else{
+            
+        
+        Nodo temp = inicio;
+            
+        // ¿Cómo muevo a temp?
+        while(temp != null){
+            System.out.print(temp.getValor() + " - ");
+            temp = temp.getSiguiente();
+           }
+        }
+        System.out.println("");
+    }
+    public int tamaLista(){
+        return this.cont;
+    }
+    public void agregar(int valor){
+        Nodo nuevoNodo = new Nodo(valor);
+        
+        // Verificar si hay nodos en la lista
+        if(inicio == null){ // No hay nodos en la lista
+            inicio = nuevoNodo;
+            fin = nuevoNodo;
+        }else{ // Hay nodos en la lista
+            
+            /* Hay que movernos por la lista usando un nodo temporal hasta el
+            ultimo nodo de la lista*/
+            
+            fin.setSiguiente(nuevoNodo);
+            nuevoNodo.setPrevio(fin);
+            fin = nuevoNodo;
+        }
+        cont ++;
+        
+    } 
+    
+    // lee, pero no borra el primer nodo de la lista 
+    public Integer peek(){
+        
+        // verficiar si la lista esta vacia 
+        // si no esta vacia, regresar el valor
+        
+        if(listaVacia()){
+            return null;
+        }else{
+            return inicio.getValor();
+        }
+    }
+    
+    public Integer poll() throws Exception{
+        
+        // verficiar si la lista esta vacia 
+        // si no esta vacia, regresar el valor
+        
+        if(listaVacia()){
+            return null;
+        }else{
+            int valor = inicio.getValor();
+            // borrar el nodo
+            borrarEn(0);
+            return valor;
+        }
+    }
+            
+    public void insertarEn(int valor, int pos) throws Exception{ 
+        // ¿Qué debemos validar?
+        // insertar en una posición no válida
+        int cantNodos = tamaLista();
+        
+        if(pos < 0) // posiciones negativas
+            throw new Exception("No puede insertarse un nodo en una posición negativa");
+        else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+            throw new Exception(pos + " no es una posición valida en la lista");
+        else{
+            Nodo nuevoNodo = new Nodo(valor);
+            if(pos == 0){ // insertar al inicio de la lista
+                nuevoNodo.setSiguiente(inicio);
+                inicio.setPrevio(nuevoNodo);
+                inicio = nuevoNodo;
+            }else{
+                Nodo temp = inicio;
+                int cont = 0;
+                while(cont < pos){
+                    temp = temp.getSiguiente();
+                    cont++;
+            } 
+                nuevoNodo.setSiguiente(temp);
+                nuevoNodo.setPrevio(temp.getPrevio());
+                temp.getPrevio().setSiguiente(nuevoNodo);
+                temp.setPrevio(nuevoNodo);
+                // System.out.println(temp.getValor() + " - ");
+            }
+            this.cont++;
+        }
+    }
+    public void vaciarLista(){
+        inicio = null;
+        fin = null;
+        cont = 0;
+    }
+    public void borrarEn(int pos) throws Exception{
+        int cantNodos = tamaLista();
+        
+        if(pos < 0) // posiciones negativas
+            throw new Exception("No puede borrarse un nodo en una posición negativa");
+        else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+            throw new Exception(pos + " no es una posición valida en la lista");
+        else{
+            // Piensen como programadores
+            // Que puede salir mal si:
+            if(cantNodos == 1){
+                vaciarLista();
+            }else{
+                // borrar el primer nodo (128 LISTO)
+                // borrar nodo intermedio
+                // borar el último nodo
+                if(pos == 0){
+                    inicio = inicio.getSiguiente();
+                    
+                }else{
+                    Nodo temp = inicio;
+                    int cont = 0;
+                    while(cont < pos){
+                        temp = temp.getSiguiente();
+                        cont++;
+                 }
+                    // Nodo objSig = temp.getSiguiente(); // esta es la manera más recomendable, ya que es más legible
+                    // temp.setSiguiente(objSig.getSiguiente());
+                    temp.setSiguiente(temp.getSiguiente().getSiguiente()); // el punto convierte una dirección en un objeto -- en este caso el getSiguiente regresa un objeto
+                    temp.setPrevio(temp.getPrevio().getPrevio());
+                    
+                    if(pos == (cantNodos - 1)){ // reconectamos a fin
+                        fin = temp;
+                    }
+                }
+                this.cont--;
+            }
+            
+        }
+    }
+    public int obtenerValorEn(int pos) throws Exception{
+                int cantNodos = tamaLista();
+                int valor = 0;
+        
+                if(pos < 0) // posiciones negativas
+                throw new Exception("No puede borrarse un nodo en una posición negativa");
+                else if(pos >= cantNodos) // posiciones mayores a la cantidad de elementos
+                    throw new Exception(pos + " no es una posición valida en la lista");
+                else{
+                    Nodo temp = inicio;
+                    int cont = 0;
+                    while(cont < (pos)){
+                        temp = temp.getSiguiente();
+                        cont++;
+                    }
+                    valor = temp.getValor();
+         }
+                return valor;
+    }
+}
