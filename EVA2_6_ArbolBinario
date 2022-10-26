@@ -74,10 +74,12 @@ public class ArbolBinario {
     }
     // método privado recursivo
     private void inOrderRecu(Nodo nodo){
+        
         if(nodo != null){
             inOrderRecu(nodo.getIzquierda());
             System.out.print(nodo.getValor() + " - ");
             inOrderRecu(nodo.getDerecha());
+            
         }
     }
     
